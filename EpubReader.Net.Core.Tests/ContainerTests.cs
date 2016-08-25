@@ -1,12 +1,11 @@
-﻿using System.IO;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 
 using Shouldly;
 
 using Xunit;
 using Xunit.Abstractions;
 
-namespace EpubReader.Core.Tests
+namespace EpubReader.Net.Core.Tests
 {
     public class ContainerTests
     {

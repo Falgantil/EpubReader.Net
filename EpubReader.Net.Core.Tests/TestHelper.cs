@@ -1,7 +1,7 @@
 ﻿using System.IO;
 using System.Threading.Tasks;
 
-namespace EpubReader.Core.Tests
+namespace EpubReader.Net.Core.Tests
 {
     public static class TestHelper
     {

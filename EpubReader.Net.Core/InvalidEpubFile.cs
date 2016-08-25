@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace EpubReader.Core
+namespace EpubReader.Net.Core
 {
     public class InvalidEpubFile : Exception
     {

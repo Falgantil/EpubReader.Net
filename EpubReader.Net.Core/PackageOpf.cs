@@ -1,16 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Linq;
 
 using ICSharpCode.SharpZipLib.Zip;
 
-namespace EpubReader.Core
+namespace EpubReader.Net.Core
 {
-    public class PackageOpf
+    public class PackageOpf : BaseFile
     {
         private readonly ZipFile zipFile;
 
@@ -23,8 +20,6 @@ namespace EpubReader.Core
 
         public string TocHref { get; set; }
 
-        public string RootPath { get; set; }
-
         internal static async Task<PackageOpf> Read(ZipFile zipFile, string packagePath)
         {
             var packageOpf = new PackageOpf(zipFile);
@@ -32,23 +27,10 @@ namespace EpubReader.Core
             return packageOpf;
         }
 
-        private async Task Initialize(string packagePath)
+        protected override async Task Initialize(string filepath)
         {
-            #region Set root path
-
-            if (packagePath.Contains("/"))
-            {
-                var splitBySlash = packagePath.Split('/');
-                this.RootPath = Path.Combine(splitBySlash.Take(splitBySlash.Length - 1).ToArray());
-            }
-            else
-            {
-                this.RootPath = string.Empty;
-            }
-
-            #endregion
-
-            var document = await this.zipFile.LoadDocument(packagePath);
+            await base.Initialize(filepath);
+            var document = await this.zipFile.LoadDocument(filepath);
             var xPackage = document
                 .ElementFirst("package");
 
@@ -73,32 +55,62 @@ namespace EpubReader.Core
 
             #region Retrieve MetaData
 
-            this.MetaData = await XMetaData.Read(xPackage.ElementFirst("metadata"));
+            this.MetaData = XMetaData.Read(xPackage.ElementFirst("metadata"));
 
             #endregion
         }
 
         public XMetaData MetaData { get; set; }
 
+        public async Task<TableOfContentNcx> LoadTableOfContent()
+        {
+            return await TableOfContentNcx.Read(this.zipFile, this.CombinePath(this.TocHref));
+        }
+
         public class XMetaData
         {
-            private XMetaData() { }
+            private XMetaData(XElement xMetaData)
+            {
+                this.Titles = xMetaData.GetElementValue("title");
+                this.Creators = xMetaData.GetElementValue("creator");
+                this.Languages = xMetaData.GetElementValue("language");
+                this.Date = xMetaData.ElementFirst("date")?.Value;
+            }
 
             public List<string> Titles { get; private set; }
             public List<string> Creators { get; private set; }
             public List<string> Languages { get; private set; }
             public string Date { get; private set; }
 
-            public static async Task<XMetaData> Read(XElement xMetaData)
+            public static XMetaData Read(XElement xMetaData)
             {
-                return new XMetaData
-                {
-                    Titles = xMetaData.GetElementValue("title"),
-                    Creators = xMetaData.GetElementValue("creator"),
-                    Languages = xMetaData.GetElementValue("language"),
-                    Date = xMetaData.ElementFirst("date")?.Value
-                };
+                return new XMetaData(xMetaData);
             }
+        }
+    }
+
+    public abstract class BaseFile
+    {
+        public string RootPath { get; private set; }
+
+        protected virtual async Task Initialize(string filePath)
+        {
+            this.RootPath = XmlHelper.GetRootPath(filePath);
+        }
+
+        protected string CombinePath(params string[] paths)
+        {
+            List<string> p = new List<string>
+            {
+                this.RootPath
+            };
+            p.AddRange(paths);
+            var combinePath = XmlHelper.CombinePath(p.ToArray());
+            if (combinePath.Contains("#"))
+            {
+                combinePath = combinePath.Substring(0, combinePath.IndexOf("#"));
+            }
+            return combinePath;
         }
     }
 }

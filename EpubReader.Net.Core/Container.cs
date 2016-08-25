@@ -1,13 +1,9 @@
-﻿using System.Collections.Generic;
-using System.Diagnostics;
-using System.IO;
-using System.Linq;
-using System.Text;
+﻿using System.IO;
 using System.Threading.Tasks;
-using System.Xml.Linq;
+
 using ICSharpCode.SharpZipLib.Zip;
 
-namespace EpubReader.Core
+namespace EpubReader.Net.Core
 {
     public class Container
     {

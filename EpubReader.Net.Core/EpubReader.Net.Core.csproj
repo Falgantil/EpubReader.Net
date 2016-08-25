@@ -35,9 +35,11 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="Container.cs" />
+    <Compile Include="HtmlFile.cs" />
     <Compile Include="InvalidEpubFile.cs" />
     <Compile Include="PackageOpf.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="TableOfContentNcx.cs" />
     <Compile Include="XmlHelper.cs" />
     <Compile Include="ZipHelper.cs" />
   </ItemGroup>

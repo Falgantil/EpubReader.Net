@@ -48,6 +48,8 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.XML" />
+    <Reference Include="System.Xml.Linq" />
     <Reference Include="xunit.abstractions, Version=2.0.0.0, Culture=neutral, PublicKeyToken=8d05b1bb7a6fdb6c, processorArchitecture=MSIL">
       <HintPath>..\packages\xunit.abstractions.2.0.0\lib\net35\xunit.abstractions.dll</HintPath>
       <Private>True</Private>
@@ -75,34 +77,28 @@
   </Choose>
   <ItemGroup>
     <Compile Include="ContainerTests.cs" />
+    <Compile Include="HtmlFileTests.cs" />
     <Compile Include="PackageOpfTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="TableOfContentNcxTests.cs" />
     <Compile Include="TestHelper.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Files\book1.epub" />
-    <None Include="Files\book1\EPUB\content\figure-gallery\figure-gallery-impl.xhtml" />
-    <None Include="Files\book1\EPUB\content\nav.xhtml" />
-    <None Include="Files\book1\EPUB\content\text.xhtml" />
-    <None Include="Files\book1\EPUB\nav.ncx" />
-    <None Include="Files\book1\EPUB\package.opf" />
-    <None Include="Files\book1\mimetype" />
-    <None Include="Files\book2.epub" />
-    <None Include="Files\book2\mimetype" />
-    <None Include="Files\book2\OEBPS\0001.xhtml" />
-    <None Include="Files\book2\OEBPS\0005.xhtml" />
-    <None Include="Files\book2\OEBPS\0006.xhtml" />
-    <None Include="Files\book2\OEBPS\0007.xhtml" />
-    <None Include="Files\book2\OEBPS\cover.xhtml" />
-    <None Include="Files\book2\OEBPS\loft.xhtml" />
-    <None Include="Files\book2\OEBPS\nav.xhtml" />
-    <None Include="Files\book2\OEBPS\package.opf" />
-    <None Include="Files\book2\OEBPS\publ.xhtml" />
-    <None Include="Files\book2\OEBPS\toc.ncx" />
-    <None Include="Files\book2\OEBPS\xnotes.xhtml" />
-    <None Include="Files\book3.epub" />
-    <None Include="Files\book4.epub" />
-    <None Include="Files\book5.epub" />
+    <None Include="Files\book1.epub">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Files\book2.epub">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Files\book3.epub">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Files\book4.epub">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Files\book5.epub">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
@@ -110,59 +106,6 @@
       <Project>{6d2470b8-3b55-49fb-8bb2-d4db79aa7e4d}</Project>
       <Name>EpubReader.Net.Core</Name>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Files\book1\EPUB\content\figure-gallery\figure-gallery.css" />
-    <Content Include="Files\book1\EPUB\content\figure-gallery\figure-gallery.js" />
-    <Content Include="Files\book1\EPUB\content\figure-gallery\jquery-1.7.1.min.js" />
-    <Content Include="Files\book1\EPUB\content\figure-gallery\reset.css" />
-    <Content Include="Files\book1\EPUB\content\moon-phases.xml" />
-    <Content Include="Files\book1\EPUB\css\epub.css" />
-    <Content Include="Files\book1\EPUB\images\cover.jpg" />
-    <Content Include="Files\book1\EPUB\images\moon-images\1.new-moon-thumb.jpg" />
-    <Content Include="Files\book1\EPUB\images\moon-images\1.new-moon.jpg" />
-    <Content Include="Files\book1\EPUB\images\moon-images\2.waxing-crescent-thumb.jpg" />
-    <Content Include="Files\book1\EPUB\images\moon-images\2.waxing-crescent.jpg" />
-    <Content Include="Files\book1\EPUB\images\moon-images\3.first-quarter-thumb.jpg" />
-    <Content Include="Files\book1\EPUB\images\moon-images\3.first-quarter.jpg" />
-    <Content Include="Files\book1\EPUB\images\moon-images\4.waxing-gibbous-thumb.jpg" />
-    <Content Include="Files\book1\EPUB\images\moon-images\4.waxing-gibbous.jpg" />
-    <Content Include="Files\book1\EPUB\images\moon-images\5.full-moon-thumb.jpg" />
-    <Content Include="Files\book1\EPUB\images\moon-images\5.full-moon.jpg" />
-    <Content Include="Files\book1\EPUB\images\moon-images\6.waning-gibbous-thumb.jpg" />
-    <Content Include="Files\book1\EPUB\images\moon-images\6.waning-gibbous.jpg" />
-    <Content Include="Files\book1\EPUB\images\moon-images\7.third-quarter-thumb.jpg" />
-    <Content Include="Files\book1\EPUB\images\moon-images\7.third-quarter.jpg" />
-    <Content Include="Files\book1\EPUB\images\moon-images\8.waning-crescent-thumb.jpg" />
-    <Content Include="Files\book1\EPUB\images\moon-images\8.waning-crescent.jpg" />
-    <Content Include="Files\book1\META-INF\container.xml" />
-    <Content Include="Files\book2\META-INF\container.xml" />
-    <Content Include="Files\book2\OEBPS\cover.png" />
-    <Content Include="Files\book2\OEBPS\images\1125Paperwhite1.jpg" />
-    <Content Include="Files\book2\OEBPS\images\1125paperwhite2.jpg" />
-    <Content Include="Files\book2\OEBPS\images\1125paperwhite3.jpg" />
-    <Content Include="Files\book2\OEBPS\images\iBooksMath1.png" />
-    <Content Include="Files\book2\OEBPS\images\iBooksMath2.png" />
-    <Content Include="Files\book2\OEBPS\images\koboStore.png" />
-    <Content Include="Files\book2\OEBPS\images\publisherLogo.jpg" />
-    <Content Include="Files\book2\OEBPS\images\readiumMath1.png" />
-    <Content Include="Files\book2\OEBPS\images\readiumMath2.jpg" />
-    <Content Include="Files\book2\OEBPS\styles\style.css" />
-    <Content Include="Files\book2\OEBPS\themes\cas-common.css" />
-    <Content Include="Files\book2\OEBPS\themes\cas-common_epub.css" />
-    <Content Include="Files\book2\OEBPS\themes\cas-common_kindle.css" />
-    <Content Include="Files\book2\OEBPS\themes\cas.css" />
-    <Content Include="Files\book2\OEBPS\themes\normal-serif\common.css" />
-    <Content Include="Files\book2\OEBPS\themes\normal-serif\copyright.css" />
-    <Content Include="Files\book2\OEBPS\themes\normal-serif\cover.css" />
-    <Content Include="Files\book2\OEBPS\themes\normal-serif\generic.css" />
-    <Content Include="Files\book2\OEBPS\themes\normal-serif\loft.css" />
-    <Content Include="Files\book2\OEBPS\themes\normal-serif\opening.css" />
-    <Content Include="Files\book2\OEBPS\themes\normal-serif\publ-index.css" />
-    <Content Include="Files\book2\OEBPS\themes\normal-serif\references.css" />
-    <Content Include="Files\book2\OEBPS\themes\normal-serif\toc.css" />
-    <Content Include="Files\book2\OEBPS\themes\normal-serif\xnotes.css" />
-    <Content Include="Files\book2\OEBPS\themes\sim2ruby.css" />
   </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">
