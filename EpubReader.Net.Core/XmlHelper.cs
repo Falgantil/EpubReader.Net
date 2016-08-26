@@ -35,7 +35,22 @@ namespace EpubReader.Net.Core
 
         public static string CombinePath(params string[] paths)
         {
-            return string.Join("/", paths);
+            paths = paths.SelectMany(s => s.Split('/')).ToArray();
+            List<string> p = new List<string>();
+            foreach (var path in paths)
+            {
+                if (path == "..")
+                {
+                    p.RemoveAt(p.Count - 1);
+                    continue;
+                }
+                if (string.IsNullOrEmpty(path))
+                {
+                    continue;
+                }
+                p.Add(path);
+            }
+            return string.Join("/", p);
         }
     }
 }
